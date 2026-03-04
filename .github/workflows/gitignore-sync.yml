@@ -1,0 +1,46 @@
+name: 🛡️ Gitignore Logic Sync
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Monthly Schedule (1st of every month)
+  workflow_dispatch:     # Allows manual trigger from your Oppo A53
+
+jobs:
+  update-logic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Current Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔄 Fetch Gold Standard
+        run: |
+          # Fetching from your dedicated hassanbiswas/gitignore repository
+          curl -sSL https://raw.githubusercontent.com/hassanbiswas/gitignore/main/.gitignore -o .gitignore
+          
+          # Injecting Logic Preservation & Cache-Busting Comment
+          # Using your preferred Date logic for versioning
+          echo "\n# Auto-Synced: $(date +'%Y-%m-%d')" >> .gitignore
+          echo "# Version Logic: const VERSION = $(date +'%d');" >> .gitignore
+
+      - name: 🚀 Commit and Push Updates
+        run: |
+          git config --global user.name "Hassan Biswas"
+          git config --global user.email "hassanbiswas.github.io@gmail.com"
+          
+          # Check for changes to avoid empty commits
+          if [[ -n "$(git status --porcelain .gitignore)" ]]; then
+            git add .gitignore
+            git commit -m "chore(auto): sync .gitignore standards [v$(date +'%d')]"
+            git push
+          else
+            echo "No changes detected. Repository is already up to date."
+          fi
+
+      - name: 🧹 Cleanup & Security
+        # Basic check to ensure no .env files were tracked before the sync
+        run: |
+          git rm -r --cached .env --ignore-unmatch
+          git rm -r --cached node_modules --ignore-unmatch
+          
