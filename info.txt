@@ -1,0 +1,3 @@
+Centralized Standards: Instead of manually creating a .gitignore for every new project, you can maintain a single, "gold standard" version in this repository. This aligns with your goal of zero maintenance.
+Global Configuration: You can configure Git on your Oppo A53 to use this file globally. By running git config --global core.excludesfile ~/.gitignore_global, you ensure that system-specific clutter (like Android's .thumbnails or .DS_Store) is never accidentally pushed to any of your repositories.
+Security & Cleanliness: It serves as a safety net to prevent sensitive data (like .env files or API keys) from leaking, which is critical for maintaining your professional SEO-friendly digital experiences.
