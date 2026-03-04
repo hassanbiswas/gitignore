@@ -6,6 +6,21 @@
 This repository serves as the **Single Source of Truth** for my project hygiene and repository standards. It is designed for high-performance web development, ensuring that only SEO-friendly, optimized source code (HTML, CSS, JS) is tracked.
 
 ---
+.
+├── .github/
+│   └── workflows/
+│       └── gitignore-sync.yml    # The auto-sync logic we created
+├── app/                          # Main application container
+│   ├── assets/                   # Flattening logic target
+│   │   ├── css/
+│   │   │   └── style.css         # Pre-filled with HSL(240, 80%, 50%)
+│   │   ├── js/
+│   │   │   └── main.js           # Pre-filled with Date cache-busting
+│   │   └── svg/                  # Optimized for sizes="any"
+│   └── index.html                # SEO-optimized entry point
+├── .gitignore                    # Your Gold Standard file
+└── README.md                     # The brand documentation
+
 
 ## 🚀 Purpose & Logic
 I use this repository to maintain a "set-and-forget" automation workflow. By centralizing my `.gitignore` logic here, I ensure:
